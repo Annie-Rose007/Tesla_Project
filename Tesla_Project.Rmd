@@ -28,17 +28,24 @@ Pour mener cette étude, nous nous appuierons sur une compilation de données ac
 * Date (MM/JJ/AAAA)
 
 * Country (le pays)
-State (la province)
-Deaths (le compte total des décès)
-Description (la raison de l’accident)
-Tesla driver (décès du conducteur)
-Tesla occupant (décès des passagers)
-Other vehicle (décès des occupants dans une autre voiture)
-Cyclists/ Peds (décès de piétons ou cyclistes)
-TSLA+cycl / peds
-Model (modèle du véhicule)
 
-Verified Tesla Autopilot Death (décès confirmé dû à l’autopilotage / autopilotage engagé lors de l’accident)
+* State (la province)
+
+* Deaths (le compte total des décès)
+
+* Description (la raison de l’accident)
+
+* Tesla driver (décès du conducteur)
+
+*Tesla occupant (décès des passagers)
+
+* Other vehicle (décès des occupants dans une autre voiture)
+
+* Cyclists/ Peds (décès de piétons ou cyclistes)
+
+* Model (modèle du véhicule)
+
+* Verified Tesla Autopilot Death (décès confirmé dû à l’autopilotage / autopilotage engagé lors de l’accident)
 
 Cette approche méthodique, basée sur des données spécifiques, vise à apporter un éclairage objectif sur un enjeu de sécurité publique majeur lié aux nouvelles technologies automobiles.
 
