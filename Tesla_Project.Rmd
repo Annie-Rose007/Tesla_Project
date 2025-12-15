@@ -117,6 +117,11 @@ head(Tesla_casualties)
 glimpse(Tesla_casualties)
 ```
 
+Nous nous penchons maintenant sur une interrogation centrale : quel modèle de voiture, lorsque l'autopilote est activé, est le plus susceptible d'être impliqué dans des accidents mortels ? Pour répondre à cette question, nous posons l'hypothèse que le Modèle 3, en raison de sa vaste diffusion, serait le plus représenté dans ces statistiques.
+
+Afin de vérifier la validité de cette supposition, nous avons croisé les données de mortalité avec les modèles de véhicules spécifiquement impliqués dans des incidents où le système Autopilot était engagé. Bien que la popularité massive d'un modèle puisse influencer statistiquement le nombre d'incidents bruts, l'analyse des variables permet de distinguer si un modèle particulier se démarque par une récurrence plus élevée d'accidents technologiques.
+
+Le graphique suivant présente la répartition des décès par modèle de voiture dans les cas où l'Autopilot a été formellement identifié comme étant actif ou ayant joué un rôle au moment de l'impact : 
 
 
 ```{r graph_autopilote_deaths_and_model}
@@ -176,6 +181,14 @@ summary(Model_predictif)
 summary(Model_predictif)
 
 ```
+
+L'analyse des données présentées dans le graphique "Décès liés à l'Autopilot par catégorie de victime et modèle de voiture" confirme visuellement l'hypothèse selon laquelle le Model 3 est le modèle de véhicule le plus susceptible d'être impliqué dans des accidents mortels lorsque l'autopilote est activé.
+
+En observant attentivement le graphique, on constate que les barres associées au Model 3 (représentées par la couleur rouge dans les catégories "Tesla driver" et "Other vehicle") sont systématiquement les plus élevées. Cela indique un nombre absolu de décès supérieur pour ce modèle par rapport aux Model S, X et Y dans les principales catégories de victimes. Le graphique fournit un décompte brut qui valide l'hypothèse de l'utilisateur sur la base des fréquences absolues d'accidents.
+
+Cependant, il est essentiel de souligner la limite de cette analyse. Le graphique se concentre uniquement sur le nombre total de décès et n'inclut aucune donnée sur le contexte crucial, comme le volume total de véhicules de chaque modèle en circulation ou le nombre total de kilomètres parcourus avec l'autopilote activé. Le Model 3 étant le véhicule le plus vendu de la gamme, sa présence accrue sur les routes peut mécaniquement gonfler les statistiques brutes d'accidents sans nécessairement indiquer un taux d'accidents proportionnellement plus élevé par kilomètre parcouru. L'analyse visuelle confirme la fréquence absolue la plus élevée pour le Model 3, mais une analyse plus rigoureuse nécessiterait des données d'exposition.
+
+
 
 ```{r graph_deces_annees}
 #totaliser les décès par années
