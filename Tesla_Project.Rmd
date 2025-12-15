@@ -37,7 +37,7 @@ Pour mener cette étude, nous nous appuierons sur une compilation de données ac
 
 * Tesla driver (décès du conducteur)
 
-*Tesla occupant (décès des passagers)
+* Tesla occupant (décès des passagers)
 
 * Other vehicle (décès des occupants dans une autre voiture)
 
@@ -52,7 +52,7 @@ Cette approche méthodique, basée sur des données spécifiques, vise à apport
 ```{r creer_nouveau_dataframe_select, include=FALSE}
 #dataframe selectionner
 Tesla_casualties <- td_csv %>%
-  select(Year, Date, Country, State, Deaths, Description, `Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`, `TSLA+cycl / peds`, Model, `AutoPilot claimed`, `Verified Tesla Autopilot Death`) %>%
+  select(Year, Date, Country, State, Deaths, `Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`, Model, `Verified Tesla Autopilot Death`) %>%
 
 
 #Remplacer les "-"
@@ -61,18 +61,16 @@ Tesla_casualties <- td_csv %>%
          `Tesla occupant` = na_if(`Tesla occupant`, "-"),
          `Other vehicle` = na_if(`Other vehicle`, "-"),
          `Cyclists/ Peds` = na_if(`Cyclists/ Peds`, "-"), 
-         `TSLA+cycl / peds` = na_if(`TSLA+cycl / peds`, "-"),
          Model = na_if(Model, "-"),
-         `AutoPilot claimed` = na_if(`AutoPilot claimed`, "-"),
          `Verified Tesla Autopilot Death` = na_if(`Verified Tesla Autopilot Death`, "-")) %>%
 
 #Convertir les colonnes en types numerique
   mutate(across(
-    c(`Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`, `TSLA+cycl / peds`, `AutoPilot claimed`, `Verified Tesla Autopilot Death`), as.numeric)) %>%
+    c(`Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`, `Verified Tesla Autopilot Death`), as.numeric)) %>%
   
 #Remplacer toutes les valeurs NA, etc par "0"
   mutate(across(
-    c(`Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`, `TSLA+cycl / peds`, `AutoPilot claimed`, `Verified Tesla Autopilot Death`), replace_na, 0))
+    c(`Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`, `Verified Tesla Autopilot Death`), replace_na, 0))
 
 #Agreger les donnees pour compter chaque models (IL MANQUE CYB!!!!!!!!)
 Model <- Tesla_casualties %>%
