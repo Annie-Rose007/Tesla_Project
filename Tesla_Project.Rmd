@@ -117,6 +117,8 @@ head(Tesla_casualties)
 glimpse(Tesla_casualties)
 ```
 
+## Model 3 : Victime de son succès ou véritable défaut de sécurité ?
+
 Nous nous penchons maintenant sur une interrogation centrale : quel modèle de voiture, lorsque l'autopilote est activé, est le plus susceptible d'être impliqué dans des accidents mortels ? Pour répondre à cette question, nous posons l'hypothèse que le Modèle 3, en raison de sa vaste diffusion, serait le plus représenté dans ces statistiques.
 
 Afin de vérifier la validité de cette supposition, nous avons croisé les données de mortalité avec les modèles de véhicules spécifiquement impliqués dans des incidents où le système Autopilot était engagé. Bien que la popularité massive d'un modèle puisse influencer statistiquement le nombre d'incidents bruts, l'analyse des variables permet de distinguer si un modèle particulier se démarque par une récurrence plus élevée d'accidents technologiques.
@@ -188,7 +190,7 @@ En observant attentivement le graphique, on constate que les barres associées a
 
 Cependant, il est essentiel de souligner la limite de cette analyse. Le graphique se concentre uniquement sur le nombre total de décès et n'inclut aucune donnée sur le contexte crucial, comme le volume total de véhicules de chaque modèle en circulation ou le nombre total de kilomètres parcourus avec l'autopilote activé. Le Model 3 étant le véhicule le plus vendu de la gamme, sa présence accrue sur les routes peut mécaniquement gonfler les statistiques brutes d'accidents sans nécessairement indiquer un taux d'accidents proportionnellement plus élevé par kilomètre parcouru. L'analyse visuelle confirme la fréquence absolue la plus élevée pour le Model 3, mais une analyse plus rigoureuse nécessiterait des données d'exposition.
 
-##sous-titre
+##Pilote automatique, danger réel : Qui paie le prix fort lors d'un accident ?
 
 Au-delà du modèle de véhicule, il est essentiel de s’interroger sur la répartition des victimes au sein de l’habitacle et à l’extérieur de celui-ci. Nous posons ici la question suivante : qui est le plus susceptible de mourir lors d'un accident où l'autopilote est activé ?
 
@@ -196,7 +198,7 @@ Notre hypothèse est que les passagers (occupants de la Tesla) présentent une v
 
 Pour vérifier cette théorie, nous avons isolé les variables identifiant le rôle de chaque victime : le conducteur, les passagers du véhicule Tesla, les occupants des autres véhicules impliqués, ainsi que les usagers vulnérables (piétons et cyclistes). Cette distinction est cruciale pour comprendre si l'assistance à la conduite modifie la nature des risques pour les différentes personnes présentes sur la route.
 
-Le graphique ci-dessous ventile le nombre de décès par catégorie de victimes, permettant de confirmer si le conducteur survit effectivement plus souvent que ses passagers ou les tiers lors de ces collisions :
+Le graphique précédant,  intitulé "Décès liés à l’Autopilote par catégorie de victime et modèle de voiture", ventile les données par profil de victime. Cette visualisation permet de vérifier si, lors de ces collisions, le conducteur présente effectivement un taux de survie supérieur à celui des passagers ou des tiers.
 
 ```{r graph_deces_annees}
 #totaliser les décès par années
