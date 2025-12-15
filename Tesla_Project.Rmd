@@ -49,7 +49,7 @@ Pour mener cette étude, nous nous appuierons sur une compilation de données ac
 
 Cette approche méthodique, basée sur des données spécifiques, vise à apporter un éclairage objectif sur un enjeu de sécurité publique majeur lié aux nouvelles technologies automobiles.
 
-```{r creer_nouveau_dataframe_select, include=FALSE}
+```{r dataframe_select, include=FALSE}
 #dataframe selectionner
 Tesla_casualties <- td_csv %>%
   select(Year, Date, Country, State, Deaths, `Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`, Model, `Verified Tesla Autopilot Death`) %>%
@@ -81,7 +81,7 @@ Model <- Tesla_casualties %>%
  
   
   
-#corriger l'erreur d'annees pour le case 431.1
+#corriger l'erreur d'annees pour le "case" 431.1
   Tesla_casualties$Year[Tesla_casualties$Year == 431.1] <- 2024
   
 #Afficher annees
@@ -117,6 +117,65 @@ head(Tesla_casualties)
 glimpse(Tesla_casualties)
 ```
 
+
+
+```{r graph_autopilote_deaths_and_model}
+#pk est ce que le model CYB n'est pas dans le graphique????
+
+# Rassembler les colonnes de décès spécifiques
+Model_verified_autopilot_death <- Tesla_casualties %>%
+  
+  # Filtrer uniquement les cas où l'Autopilot a été "claimed" (non NA, ou 1)
+  filter(`Verified Tesla Autopilot Death` == 1) %>%
+  
+  # Rassembler les colonnes spécifiques de décès
+  pivot_longer(
+    cols = c(`Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`),
+    names_to = "Category",
+    values_to = "Deaths_Count"
+  ) %>%
+  
+  # Retirer les lignes où le nombre de décès est 0 ou NA après le pivot
+  filter(Deaths_Count > 0, !is.na(Model)) %>%
+  
+  # Agréger le nombre total de décès par Catégorie et par Modèle de voiture
+  group_by(Model, Category) %>%
+  summarise(Total_Deaths = sum(Deaths_Count, na.rm = TRUE), .groups = 'drop')
+
+Model_verified_autopilot_death <- ggplot(Model_verified_autopilot_death, aes(x = Category, y = Total_Deaths, fill = Model)) +
+  geom_col(position = position_dodge(width = 0.9)) + # Barres groupées côte à côte
+  labs(
+    title = "Décès liés à l'Autopilot par catégorie de victime et modèle de voiture",
+    x = "Catégorie de victime",
+    y = "Nombre total de décès",
+    fill = "Modèle Tesla" # Légende de remplissage
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotation des étiquettes X pour la lisibilité
+
+# Afficher le graphique
+print(Model_verified_autopilot_death)
+
+
+#regression lineair multiples
+
+#convertir en facteurs variables catégorielles
+Tesla_casualties$Model <- as.factor(Tesla_casualties$Model)
+Tesla_casualties$`Verified Tesla Autopilot Death` <- as.factor(Tesla_casualties$`Verified Tesla Autopilot Death`)
+
+#convertir en format numerique
+Tesla_casualties$Year <- as.numeric(Tesla_casualties$Year)
+
+#regression
+Model_predictif <- lm(Deaths~ Year + Model + `Verified Tesla Autopilot Death`, data = Tesla_casualties)
+
+#afficher résultat
+summary(Model_predictif)
+
+#afficher résultat
+summary(Model_predictif)
+
+```
 
 ```{r graph_deces_annees}
 #totaliser les décès par années
@@ -212,87 +271,6 @@ knitr::kable(Deaths_per_state_USA)
 ```
 
 
-```{r graph_autopilote_deaths_and_model}
-#pk est ce que le model CYB n'est pas dans le graphique????
-
-# Rassembler les colonnes de décès spécifiques
-Model_verified_autopilot_death <- Tesla_casualties %>%
-  
-  # Filtrer uniquement les cas où l'Autopilot a été "claimed" (non NA, ou 1)
-  filter(`Verified Tesla Autopilot Death` == 1) %>%
-  
-  # Rassembler les colonnes spécifiques de décès
-  pivot_longer(
-    cols = c(`Tesla driver`, `Tesla occupant`, `Other vehicle`, `Cyclists/ Peds`),
-    names_to = "Category",
-    values_to = "Deaths_Count"
-  ) %>%
-  
-  # Retirer les lignes où le nombre de décès est 0 ou NA après le pivot
-  filter(Deaths_Count > 0, !is.na(Model)) %>%
-  
-  # Agréger le nombre total de décès par Catégorie et par Modèle de voiture
-  group_by(Model, Category) %>%
-  summarise(Total_Deaths = sum(Deaths_Count, na.rm = TRUE), .groups = 'drop')
-
-Model_verified_autopilot_death <- ggplot(Model_verified_autopilot_death, aes(x = Category, y = Total_Deaths, fill = Model)) +
-  geom_col(position = position_dodge(width = 0.9)) + # Barres groupées côte à côte
-  labs(
-    title = "Décès liés à l'Autopilot par catégorie de victime et modèle de voiture",
-    x = "Catégorie de victime",
-    y = "Nombre total de décès",
-    fill = "Modèle Tesla" # Légende de remplissage
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotation des étiquettes X pour la lisibilité
-
-# Afficher le graphique
-print(Model_verified_autopilot_death)
 
 
-#regression lineair multiples
 
-#convertir en facteurs variables catégorielles
-Tesla_casualties$Model <- as.factor(Tesla_casualties$Model)
-Tesla_casualties$`Verified Tesla Autopilot Death` <- as.factor(Tesla_casualties$`Verified Tesla Autopilot Death`)
-
-#convertir en format numerique
-Tesla_casualties$Year <- as.numeric(Tesla_casualties$Year)
-
-#regression
-Model_predictif <- lm(Deaths~ Year + Model + `Verified Tesla Autopilot Death`, data = Tesla_casualties)
-
-#afficher résultat
-summary(Model_predictif)
-
-#afficher résultat
-summary(Model_predictif)
-```
-
-``{r summary_skim_autopilot_model_type_deaths}
-summary(Model_verified_autopilot_death)
-skim(Model_verified_autopilot_death)
-knitr::kable(Model_verified_autopilot_death)
-
-```
-
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
