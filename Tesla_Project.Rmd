@@ -190,7 +190,7 @@ En observant attentivement le graphique, on constate que les barres associées a
 
 Cependant, il est essentiel de souligner la limite de cette analyse. Le graphique se concentre uniquement sur le nombre total de décès et n'inclut aucune donnée sur le contexte crucial, comme le volume total de véhicules de chaque modèle en circulation ou le nombre total de kilomètres parcourus avec l'autopilote activé. Le Model 3 étant le véhicule le plus vendu de la gamme, sa présence accrue sur les routes peut mécaniquement gonfler les statistiques brutes d'accidents sans nécessairement indiquer un taux d'accidents proportionnellement plus élevé par kilomètre parcouru. L'analyse visuelle confirme la fréquence absolue la plus élevée pour le Model 3, mais une analyse plus rigoureuse nécessiterait des données d'exposition.
 
-##Pilote automatique, danger réel : Qui paie le prix fort lors d'un accident ?
+## Pilote automatique, danger réel : Qui paie le prix fort lors d'un accident ?
 
 Au-delà du modèle de véhicule, il est essentiel de s’interroger sur la répartition des victimes au sein de l’habitacle et à l’extérieur de celui-ci. Nous posons ici la question suivante : qui est le plus susceptible de mourir lors d'un accident où l'autopilote est activé ?
 
@@ -199,32 +199,6 @@ Notre hypothèse est que les passagers (occupants de la Tesla) présentent une v
 Pour vérifier cette théorie, nous allons analysé le graphique juste en haut qui présente les variables identifiant le rôle de chaque victime : le conducteurdu véhicule Tesla, les passagers du véhicule Tesla, les occupants des autres véhicules impliqués, ainsi que les usagers vulnérables (piétons et cyclistes). Cette distinction est cruciale pour comprendre si l'assistance à la conduite modifie la nature des risques pour les différentes personnes présentes sur la route.
 
 Contrairement à notre hypothèse initiale, ce ne sont pas les passagers de la Tesla, mais bien les occupants des autres véhicules qui paient le plus lourd tribut. Le graphique illustre une prédominance marquée des décès dans la catégorie "Other vehicle". En comparaison, les catégories internes au véhicule (conducteur et passagers Tesla) affichent des chiffres bien moindres, mettant en lumière une disparité importante dans le bilan des victimes lors d'un accident sous l'autopilotage.
-
-
-```{r graph_deces_annees}
-#totaliser les décès par années
-Deaths_per_year <- Tesla_casualties %>%
-  group_by(Year) %>%
-  summarise(Deaths_per_year = sum(Deaths, na.rm = TRUE))
-  
-
-ggplot(data = Deaths_per_year, aes(x = Year, y = Deaths_per_year)) +
-         geom_line(color = "red", linewidth = 1) +
-         geom_point(color = "red", size = 3) +
-         labs(title = "Évolution du nombre total de décès par an",
-              x = "Années",
-              y = "Nombre total de décès") +
-  theme_minimal()
-
-```
-```{r summary_skim_stats_years_deaths}
-summary(Deaths_per_year)
-skim(Deaths_per_year)
-knitr::kable(Deaths_per_year)
-
-```
-
-
 
 ```{r graph_deces_pays}
 #Totaliser deces par pays
@@ -246,12 +220,6 @@ ggplot(aes(x = reorder(Country, -Deaths_per_Country), y = Deaths_per_Country)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 print(Deaths_per_Country)
-
-```
-
-```{r summary_skim_stats}
-#pk est ce que ca marche pas??????
-summary(Deaths_per_Country)
 
 ```
 
@@ -295,6 +263,25 @@ knitr::kable(Deaths_per_state_USA)
 ```
 
 
+```{r graph_deces_annees}
+#totaliser les décès par années
+Deaths_per_year <- Tesla_casualties %>%
+  group_by(Year) %>%
+  summarise(Deaths_per_year = sum(Deaths, na.rm = TRUE))
+  
 
+ggplot(data = Deaths_per_year, aes(x = Year, y = Deaths_per_year)) +
+         geom_line(color = "red", linewidth = 1) +
+         geom_point(color = "red", size = 3) +
+         labs(title = "Évolution du nombre total de décès par an",
+              x = "Années",
+              y = "Nombre total de décès") +
+  theme_minimal()
 
+```
+```{r summary_skim_stats_years_deaths}
+summary(Deaths_per_year)
+skim(Deaths_per_year)
+knitr::kable(Deaths_per_year)
 
+```
