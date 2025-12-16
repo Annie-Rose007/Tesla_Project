@@ -202,6 +202,8 @@ Contrairement à notre hypothèse initiale, ce ne sont pas les passagers de la T
 
 ##  Frontières et collisions : Analyse mondiale et locale des accidents.     Ou     Focus USA : Quels États sont les plus touchés par les crashs Tesla ?
 
+Avant même d'examiner le graphique spécifique, il est plausible de supposer que les États-Unis enregistrent le plus grand nombre d'accidents (ou de décès) impliquant des véhicules Tesla. Cette hypothèse repose sur le fait que les États-Unis possèdent la plus grande population de conducteurs au monde et, par conséquent, le plus grand nombre de véhicules et de kilomètres parcourus, ce qui augmente statistiquement la probabilité d'accidents par rapport à des pays plus petits comme le Danemark, la Nouvelle-Zélande ou la Suisse.
+
 
 
 ```{r graph_deces_pays}
@@ -226,6 +228,12 @@ ggplot(aes(x = reorder(Country, -Deaths_per_Country), y = Deaths_per_Country)) +
 print(Deaths_per_Country)
 
 ```
+
+
+En se référant au graphique intitulé "Nombre totale de décès par pays (Tesla)" présenté à l'écran, l'hypothèse est confirmée :
+Le graphique indique clairement que les États-Unis (USA) sont le pays avec le plus grand nombre de décès enregistrés dans le cadre de cette analyse. La barre associée aux États-Unis est significativement plus haute que toutes les autres barres du graphique, dominant visuellement la répartition des décès par pays (Chine,Allemagne, Canada,etc.).
+
+ Quels sont les États américains où l'Autopilot est le plus mis à l'épreuve ? Notre attention se porte sur le Massachusetts. Entre des infrastructures urbaines denses et des habitudes de conduite particulièrement nerveuses, cet État constitue un cas d'étude idéal pour savoir si l'IA de Tesla parvient à s'adapter à des environnements humains et physiques aussi exigeants.
 
 
 ```{r graph_deaths_usa_state}
