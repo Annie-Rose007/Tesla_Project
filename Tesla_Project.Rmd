@@ -196,9 +196,10 @@ Au-delà du modèle de véhicule, il est essentiel de s’interroger sur la rép
 
 Notre hypothèse est que les passagers (occupants de la Tesla) présentent une vulnérabilité accrue. Cette supposition repose sur l'idée que le conducteur, même en cas de distraction initiale, pourrait avoir un réflexe de survie instinctif lors de l'impact imminent, modifiant la trajectoire du véhicule d'une manière qui le privilégie inconsciemment, laissant ainsi les passagers plus exposés.
 
-Pour vérifier cette théorie, nous avons isolé les variables identifiant le rôle de chaque victime : le conducteur, les passagers du véhicule Tesla, les occupants des autres véhicules impliqués, ainsi que les usagers vulnérables (piétons et cyclistes). Cette distinction est cruciale pour comprendre si l'assistance à la conduite modifie la nature des risques pour les différentes personnes présentes sur la route.
+Pour vérifier cette théorie, nous allons analysé le graphique juste en haut qui présente les variables identifiant le rôle de chaque victime : le conducteurdu véhicule Tesla, les passagers du véhicule Tesla, les occupants des autres véhicules impliqués, ainsi que les usagers vulnérables (piétons et cyclistes). Cette distinction est cruciale pour comprendre si l'assistance à la conduite modifie la nature des risques pour les différentes personnes présentes sur la route.
 
-Le graphique précédant,  intitulé "Décès liés à l’Autopilote par catégorie de victime et modèle de voiture", ventile les données par profil de victime. Cette visualisation permet de vérifier si, lors de ces collisions, le conducteur présente effectivement un taux de survie supérieur à celui des passagers ou des tiers.
+Contrairement à notre hypothèse initiale, ce ne sont pas les passagers de la Tesla, mais bien les occupants des autres véhicules qui paient le plus lourd tribut. Le graphique illustre une prédominance marquée des décès dans la catégorie "Other vehicle". En comparaison, les catégories internes au véhicule (conducteur et passagers Tesla) affichent des chiffres bien moindres, mettant en lumière une disparité importante dans le bilan des victimes lors d'un accident sous l'autopilotage.
+
 
 ```{r graph_deces_annees}
 #totaliser les décès par années
