@@ -19,9 +19,9 @@ td_csv <- read_csv("td-csv.csv")
 
 Fondée au début des années 2000, Tesla a révolutionné l'industrie automobile en popularisant les véhicules électriques hautes performances et la technologie de conduite assistée. Cependant, l'entreprise fait face à une augmentation des questions concernant la sécurité de ses véhicules et des problèmes de qualité perçus.
 
-La problématique centrale de cette analyse est de déterminer si les accidents mortels impliquant des véhicules Tesla sont principalement dus à une erreur humaine ou à des défaillances technologiques (robotique). Cette question est cruciale, car l'identification précise des causes permettrait de développer des mesures préventives efficaces pour réduire le nombre de décès.
+La problématique centrale de cette analyse est de *déterminer si les accidents mortels impliquant des véhicules Tesla sont principalement dus à une erreur humaine ou à des défaillances technologiques (robotique)*. Cette question est cruciale, car l'identification précise des causes permettrait de développer des mesures préventives efficaces pour réduire le nombre de décès.
 
-Pour mener cette étude, nous nous appuierons sur une compilation de données accessible via le site web https://www.tesladeaths.com/. Cette base de données exhaustive inclut diverses sections, dont celle dédiée aux "Deaths" (Décès), qui comporte 23 variables pertinentes. Dans le cadre de cette analyse, nous nous concentrerons sur les variables suivantes :
+Pour mener cette étude, nous nous appuierons sur une compilation de données accessible via le site web https://www.tesladeaths.com/. Cette base de données exhaustive inclut diverses sections, dont celle dédiée aux "Deaths" (Décès), qui comporte 23 variables pertinentes. Dans le cadre de cette analyse, nous nous concentrerons sur les variables suivantes du fichier csv:
 
 * Year (l’année de l’accident)
 
@@ -29,11 +29,9 @@ Pour mener cette étude, nous nous appuierons sur une compilation de données ac
 
 * Country (le pays)
 
-* State (la province)
+* State (l'État)
 
 * Deaths (le compte total des décès)
-
-* Description (la raison de l’accident)
 
 * Tesla driver (décès du conducteur)
 
@@ -127,9 +125,7 @@ Le graphique suivant présente la répartition des décès par modèle de voitur
 
 
 ```{r graph_autopilote_deaths_and_model}
-#pk est ce que le model CYB n'est pas dans le graphique????
-
-# Rassembler les colonnes de décès spécifiques
+  # Rassembler les colonnes de décès spécifiques
 Model_verified_autopilot_death <- Tesla_casualties %>%
   
   # Filtrer uniquement les cas où l'Autopilot a été "claimed" (non NA, ou 1)
@@ -179,8 +175,6 @@ Model_predictif <- lm(Deaths~ Year + Model + `Verified Tesla Autopilot Death`, d
 #afficher résultat
 summary(Model_predictif)
 
-#afficher résultat
-summary(Model_predictif)
 
 ```
 
@@ -210,12 +204,18 @@ Avant même d'examiner le graphique spécifique, il est plausible de supposer qu
 #Totaliser deces par pays
 Deaths_per_Country <- Tesla_casualties %>%
   group_by(Country) %>%
-  summarise(Deaths_per_Country = sum(Deaths, na.rm = TRUE)) %>%
+  summarise(Total_deaths = sum(Deaths, na.rm = TRUE)) %>%
   
+
+#bonne pratique
+  ungroup() %>%
+
   
 #trier pays par deces decroissant
-  arrange(desc(Deaths_per_Country)) %>%
-ggplot(aes(x = reorder(Country, -Deaths_per_Country), y = Deaths_per_Country)) +
+  arrange(desc(Total_deaths))
+
+#Graphique à barre
+ggplot(Deaths_per_Country, aes(x = reorder(Country, -Total_deaths), y = Total_deaths)) +
   geom_bar(stat = "identity", fill = "skyblue") +
   labs(title = "Nombre totale de décès par pays (Tesla)",
        x = "Pays",
@@ -226,6 +226,10 @@ ggplot(aes(x = reorder(Country, -Deaths_per_Country), y = Deaths_per_Country)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 print(Deaths_per_Country)
+
+```
+```{r knitr_Deaths_per_Conutry}
+knitr::kable(Deaths_per_Country)
 
 ```
 
@@ -253,7 +257,7 @@ Deaths_per_state_USA <- Tesla_casualties %>%
 ggplot(Deaths_per_state_USA, aes(x = "", y = Count, fill = State)) +
          geom_bar(stat = "identity", width = 1, color = "black") +
   coord_polar(theta = "y") +
-  scale_fill_brewer(palette = "Purple") + #??? c'est vert ds le graphique
+  scale_fill_brewer(palette = "Green") +
          geom_text(aes(label = paste0(round(Pourcentage, 0), "%")),
                    position = position_stack(vjust = 0.5),
                    color = "black",
@@ -276,9 +280,7 @@ Cependant, un point fondamental doit être souligné : la grande majorité de ce
 Enfin, notre hypothèse concernant le Massachusetts est infirmée. Bien que nous redoutions son infrastructure complexe, cet État ne figure pas parmi les zones les plus touchées, prouvant que le volume total de kilomètres parcourus par la flotte reste le facteur prédictif le plus fiable, bien avant le tempérament des conducteurs locaux.
 
 
-```{r summary_skim_stats_usa_state}
-summary(Deaths_per_state_USA)
-skim(Deaths_per_state_USA)
+```{r knitr_stats_usa_state}
 knitr::kable(Deaths_per_state_USA)
 
 ```
@@ -298,7 +300,6 @@ ggplot(data = Deaths_per_year, aes(x = Year, y = Deaths_per_year)) +
               x = "Années",
               y = "Nombre total de décès") +
   theme_minimal()
-
 ```
 ```{r summary_skim_stats_years_deaths}
 summary(Deaths_per_year)
