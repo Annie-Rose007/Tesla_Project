@@ -151,6 +151,12 @@ print(Model_verified_autopilot_death)
 
 ```
 
+L'analyse des données présentées dans le graphique "Décès liés à l'Autopilot par catégorie de victime et modèle de voiture" confirme visuellement l'hypothèse selon laquelle le Model 3 est le modèle de véhicule le plus susceptible d'être impliqué dans des accidents mortels lorsque l'autopilote est activé.
+
+En observant attentivement le graphique, on constate que les barres associées au Model 3 (représentées par la couleur rouge dans les catégories "Tesla driver" et "Other vehicle") sont systématiquement les plus élevées. Cela indique un nombre absolu de décès supérieur pour ce modèle par rapport aux Model S, X et Y dans les principales catégories de victimes. Le graphique fournit un décompte brut qui valide l'hypothèse de l'utilisateur sur la base des fréquences absolues d'accidents.
+
+Cependant, il est essentiel de souligner la limite de cette analyse. Le graphique se concentre uniquement sur le nombre total de décès et n'inclut aucune donnée sur le contexte crucial, comme le volume total de véhicules de chaque modèle en circulation ou le nombre total de kilomètres parcourus avec l'autopilote activé. Le Model 3 étant le véhicule le plus vendu de la gamme, sa présence accrue sur les routes peut mécaniquement gonfler les statistiques brutes d'accidents sans nécessairement indiquer un taux d'accidents proportionnellement plus élevé par kilomètre parcouru. L'analyse visuelle confirme la fréquence absolue la plus élevée pour le Model 3, mais une analyse plus rigoureuse nécessiterait des données d'exposition.
+
 ```{r regression_graph_autopilote_death_and_model}
 #regression linéair multiples
 
@@ -169,13 +175,47 @@ summary(Model_predictif)
 
 
 ```
+Le tablaux ci-haut montre le résultat de la régression linéaire du graphique "Décès liés à l'Autopilot par catégorie de victime et modèle de voiture". Commençon par expliquer chaque facteurs interessants.
 
+1. La P-value globale (Le modèle est-il utile ?) 
+Regardez la toute dernière ligne : p-value: 6.798e-06. 
 
-L'analyse des données présentées dans le graphique "Décès liés à l'Autopilot par catégorie de victime et modèle de voiture" confirme visuellement l'hypothèse selon laquelle le Model 3 est le modèle de véhicule le plus susceptible d'être impliqué dans des accidents mortels lorsque l'autopilote est activé.
+•	Elle est très inférieure à 0,05. Cela signifie que votre modèle est statistiquement significatif : les variables choisies (Year, Modèle, Autopilot) ont un impact réel sur le nombre de décès, ce n'est pas dû au hasard. 
 
-En observant attentivement le graphique, on constate que les barres associées au Model 3 (représentées par la couleur rouge dans les catégories "Tesla driver" et "Other vehicle") sont systématiquement les plus élevées. Cela indique un nombre absolu de décès supérieur pour ce modèle par rapport aux Model S, X et Y dans les principales catégories de victimes. Le graphique fournit un décompte brut qui valide l'hypothèse de l'utilisateur sur la base des fréquences absolues d'accidents.
+2. Interprétation des Coefficients (L'impact de chaque variable) 
 
-Cependant, il est essentiel de souligner la limite de cette analyse. Le graphique se concentre uniquement sur le nombre total de décès et n'inclut aucune donnée sur le contexte crucial, comme le volume total de véhicules de chaque modèle en circulation ou le nombre total de kilomètres parcourus avec l'autopilote activé. Le Model 3 étant le véhicule le plus vendu de la gamme, sa présence accrue sur les routes peut mécaniquement gonfler les statistiques brutes d'accidents sans nécessairement indiquer un taux d'accidents proportionnellement plus élevé par kilomètre parcouru. L'analyse visuelle confirme la fréquence absolue la plus élevée pour le Model 3, mais une analyse plus rigoureuse nécessiterait des données d'exposition.
+C'est ici que vous lisez l'effet de chaque facteur : 
+
+•	Year (0.038790) : La p-value est de 0,00897 (significatif). Cela indique une tendance à la hausse : chaque année supplémentaire est associée à une légère augmentation du nombre de décès (environ +0,038 par accident répertorié).
+
+•	ModelCYB (0.672110) : La p-value est de 0,02638 (significatif). Le Cybertruck semble associé à un nombre de décès par accident plus élevé (+0,67) par rapport au modèle de référence (probablement le Model 3, qui n'apparaît pas car il sert de base).
+
+•	ModelX et ModelY : Leurs p-values sont très élevées (0,89 et 0,97). Cela signifie que pour ces modèles, il n'y a pas de différence significative du nombre de décès par rapport au modèle de référence.
+
+•	Verified Tesla Autopilot Death (1 et 2) : Les deux sont très significatifs (p < 0,003).
+
+o	Le code 1 (Autopilot engagé) montre curieusement un coefficient négatif (-0,27), suggérant moins de décès par accident que lorsque l'info est inconnue.
+
+o	Le code 2 montre un coefficient positif fort (+0,70), indiquant une hausse des décès dans ces circonstances spécifiques. 
+
+3. La qualité du modèle (R2cap R squared𝑅2)
+
+•	Multiple R-squared : 0.1565
+
+•	Cela signifie que votre modèle explique environ 15,6 % de la variation du nombre de décès. C'est un score relativement faible (proche de 0), ce qui indique que beaucoup d'autres facteurs non inclus dans votre code (vitesse, météo, type de route) influencent grandement la mortalité. 
+
+4. Les codes de significativité (Les étoiles) 
+
+•	** ou *** : Impact très fiable.
+
+•	* : Impact fiable.
+
+•	. ou rien : Pas d'impact prouvé statistiquement. 
+Résumé pour votre rapport : 
+
+"L'analyse par régression montre que l'année et le modèle de véhicule (notamment le Cybertruck) influencent significativement le nombre de décès. Bien que le modèle soit statistiquement valide (p<0,05p is less than 0 comma 05𝑝<0,05), il n'explique que 15,6 % de la variance totale, suggérant que d'autres facteurs externes prédominent dans la gravité des accidents." 
+
+Attention : Notez que 393 observations ont été supprimées car des données étaient manquantes (393 observations effacées). Cela peut biaiser les résultats si les données manquantes ne sont pas aléatoires.
 
 ## Pilote automatique, danger réel : Qui paie le prix fort lors d'un accident ?
 
