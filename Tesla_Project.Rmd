@@ -149,6 +149,9 @@ Model_verified_autopilot_death <- ggplot(Model_verified_autopilot_death, aes(x =
 print(Model_verified_autopilot_death)
 
 
+```
+
+```{r regression_graph_autopilote_death_and_model}
 #regression linéair multiples
 
 #convertir en facteurs variables catégorielles
@@ -165,8 +168,8 @@ Model_predictif <- lm(Deaths~ Year + Model + `Verified Tesla Autopilot Death`, d
 summary(Model_predictif)
 
 
-
 ```
+
 
 L'analyse des données présentées dans le graphique "Décès liés à l'Autopilot par catégorie de victime et modèle de voiture" confirme visuellement l'hypothèse selon laquelle le Model 3 est le modèle de véhicule le plus susceptible d'être impliqué dans des accidents mortels lorsque l'autopilote est activé.
 
