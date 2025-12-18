@@ -353,37 +353,12 @@ Deaths_per_year <- Tesla_casualties %>%
   group_by(Year) %>%
   summarise(Total_deaths = sum(Deaths, na.rm = TRUE))
 
-#création de l'objet série temporelle (frequence = 1 pour donné annuelles)
-ts_deaths <- ts(Deaths_per_year$Total_deaths,
-                start = min(Deaths_per_year$Year),
-                frequency = 1)
 
-# Calcul du modèle
-fit_arima <- auto.arima(ts_deaths)
-
-
-# Vérification de l'existence de coefficients avant de tester
-if (length(coef(fit_arima)) > 0) {
-  # Si des coefficients existent, on fait le test
-  arima_matrix <- lmtest::coeftest(fit_arima)
-  arima_df <- as.data.frame(arima_matrix[, , drop = FALSE])
-  knitr::kable(arima_df, caption = "Significativité des coefficients ARIMA")
-} else {
-  # Si aucun coefficient (modèle simple/bruit blanc)
-  print("Le modèle ARIMA sélectionné est un modèle vide (bruit blanc ou marche aléatoire). Aucun coefficient à tester.")
-}
-
-
-pred_arima <- forecast(fit_arima, h = 5)
-
-#intervalle de confiance
-autoplot(pred_arima) +
-  
 #Graphique
-  geom_line(data = fortify(ts_deaths), aes(x = x, y = y), color = "red", linewidth = 1) +
-  geom_point(data = fortify(ts_deaths), aes(x = x, y =y), color = "red", size = 3) +
-  labs(title = "Prédiction ARIMA du nombre total de décès par an",
-       subtitle = "Données historiques (rouge) et projections (bleu)",
+ggplot(data = Deaths_per_year, aes(x = Year, y = Total_deaths)) +
+  geom_line(color = "red", linewidth = 1) +
+  geom_point(color = "red", size = 3) +
+  labs(title = "Nombre de décès par an",
               x = "Années",
               y = "Nombre total de décès") +
   theme_minimal()
