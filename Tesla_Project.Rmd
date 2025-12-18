@@ -187,9 +187,9 @@ Regardez la toute dernière ligne : p-value: 6.798e-06.
 
 •	Year (0.038790) : La p-value est de 0,00897 (significatif). Cela indique une tendance à la hausse : chaque année supplémentaire est associée à une légère augmentation du nombre de décès (environ +0,038 par accident répertorié).
 
-•	ModelCYB (0.672110) : La p-value est de 0,02638 (significatif). Le Cybertruck semble associé à un nombre de décès par accident plus élevé (+0,67) par rapport au modèle de référence (probablement le Model 3, qui n'apparaît pas car il sert de base).
+•	Model CYB (0.672110) : La p-value est de 0,02638 (significatif). Le Cybertruck semble associé à un nombre de décès par accident plus élevé (+0,67) par rapport au modèle de référence (probablement le Model 3, qui n'apparaît pas car il sert de base).
 
-•	ModelX et ModelY : Leurs p-values sont très élevées (0,89 et 0,97). Cela signifie que pour ces modèles, il n'y a pas de différence significative du nombre de décès par rapport au modèle de référence.
+•	Model X et Model Y : Leurs p-values sont très élevées (0,89 et 0,97). Cela signifie que pour ces modèles, il n'y a pas de différence significative du nombre de décès par rapport au modèle de référence.
 
 •	Verified Tesla Autopilot Death (1 et 2) : Les deux sont très significatifs (p < 0,003).
 
@@ -256,7 +256,7 @@ ggplot(Deaths_per_Country, aes(x = reorder(Country, -Total_deaths), y = Total_de
 #option si les noms se chevauchent
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-print(Deaths_per_Country)
+
 
 ```
 ```{r knitr_Deaths_per_Conutry}
