@@ -346,6 +346,10 @@ knitr::kable(Deaths_per_state_USA)
 
 ```
 
+:::: {style="display: flex; align-items: flex-start;"}
+
+::: {style="flex: 40%; padding-right: 20px;"}
+
 
 ```{r graph_deces_annees}
 #totaliser les décès par années
@@ -365,9 +369,16 @@ ggplot(data = Deaths_per_year, aes(x = Year, y = Total_deaths)) +
 
 ```
 
+:::
+
+::: {style="flex: 60%;"}
 
 
 ```{r summary_skim_stats_years_deaths}
 knitr::kable(Deaths_per_year)
 
 ```
+
+:::
+
+::::
