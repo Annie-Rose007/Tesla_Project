@@ -234,7 +234,7 @@ Avant même d'examiner le graphique spécifique, il est plausible de supposer qu
 
 :::: {style="display: flex; align-items: flex-start;"}
 
-::: {style="flex: 40%; padding-right: 20px;"}
+::: {style="flex: 80%; padding-right: 20px;"}
 
 
 ```{r graph_deces_pays}
@@ -290,8 +290,9 @@ Le graphique indique clairement que les États-Unis (USA) sont le pays avec le p
 
  Quels sont les États américains où l'Autopilot est le plus mis à l'épreuve ? Notre attention se porte sur le Massachusetts. Entre des infrastructures urbaines denses et des habitudes de conduite particulièrement nerveuses, cet État constitue un cas d'étude idéal pour savoir si l'IA de Tesla parvient à s'adapter à des environnements humains et physiques aussi exigeants.
 
+:::: {style="display: flex; align-items: flex-start;"}
 
-
+::: {style="flex: 60%; padding-right: 20px;"}
 
 ```{r graph_deaths_usa_state}
 #filtrer donnees pour États-Unis seulement
@@ -324,6 +325,9 @@ ggplot(Deaths_per_state_USA, aes(x = "", y = Count, fill = State)) +
 
 ```
 
+:::
+
+::: {style="flex: 40%;"}
 
 L'examen du diagramme circulaire révèle une répartition géographique très marquée des accidents mortels. La Californie (CA) domine largement avec 38 % des décès, suivie de la Floride (FL) à 12 %, puis de New York (NY) et du Texas (TX) avec 4 % chacun. Les 43 % restants sont fragmentés entre les 46 autres États américains.
 
@@ -333,6 +337,9 @@ Cependant, un point fondamental doit être souligné : la grande majorité de ce
 
 Enfin, notre hypothèse concernant le Massachusetts est infirmée. Bien que nous redoutions son infrastructure complexe, cet État ne figure pas parmi les zones les plus touchées, prouvant que le volume total de kilomètres parcourus par la flotte reste le facteur prédictif le plus fiable, bien avant le tempérament des conducteurs locaux.
 
+:::
+
+::::
 
 ```{r knitr_Deaths_usa_state}
 knitr::kable(Deaths_per_state_USA)
