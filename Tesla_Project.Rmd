@@ -1,5 +1,5 @@
 ---
-title: "Tesla Casualties"
+title: "Tesla: Le prix à payer pour l'innovation ?"
 author: "Annie-Rose_Grenier"
 date: "`r Sys.Date()`"
 output: html_document
