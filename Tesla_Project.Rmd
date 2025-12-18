@@ -21,7 +21,7 @@ Fondée au début des années 2000, Tesla a révolutionné l'industrie automobil
 
 La problématique centrale de cette analyse est de **déterminer si les accidents mortels impliquant des véhicules Tesla sont principalement dus à une erreur humaine ou à des défaillances technologiques (robotique)**. Cette question est cruciale, car l'identification précise des causes permettrait de développer des mesures préventives efficaces pour réduire le nombre de décès.
 
-Pour mener cette étude, nous nous appuierons sur une compilation de données accessible via le site web https://www.tesladeaths.com/. Cette base de données exhaustive inclut diverses sections, dont celle dédiée aux "Deaths" (Décès), qui comporte 23 variables pertinentes. Dans le cadre de cette analyse, nous nous concentrerons sur les variables suivantes du fichier csv:
+Pour mener cette étude, nous nous appuierons sur une compilation de données[^1] accessible via le site web https://www.tesladeaths.com/. Cette base de données exhaustive inclut diverses sections, dont celle dédiée aux "Deaths" (Décès), qui comporte 23 variables pertinentes. Dans le cadre de cette analyse, nous nous concentrerons sur les variables suivantes du fichier csv:
 
 * Year (l’année de l’accident)
 
@@ -386,3 +386,6 @@ knitr::kable(Deaths_per_year)
 :::
 
 ::::
+
+[^1]: Données extraites de la section "Deaths" du site [TeslaDeaths.com](https://www.tesladeaths.com/). Elle comprends 611 données et 21 varriables. Cette base de données collaborative compile les accidents mortels documentés à partir de rapports de police officiels, de coupures de presse et de données de la NHTSA (National Highway Traffic Safety Administration). Elle inclut des variables clés telles que le modèle du véhicule, le rôle des victimes et la confirmation de l'activation du système Autopilot lors de l'impact.
+
