@@ -225,7 +225,7 @@ Pour vérifier cette théorie, nous allons analysé le graphique juste en haut q
 
 Contrairement à notre hypothèse initiale, ce ne sont pas les passagers de la Tesla, mais bien les occupants des autres véhicules qui paient le plus lourd tribut. Le graphique illustre une prédominance marquée des décès dans la catégorie "Other vehicle". En comparaison, les catégories internes au véhicule (conducteur et passagers Tesla) affichent des chiffres bien moindres, mettant en lumière une disparité importante dans le bilan des victimes lors d'un accident sous l'autopilotage.
 
-##  Frontières et collisions : Analyse mondiale et locale des accidents.     Ou     Focus USA : Quels États sont les plus touchés par les crashs Tesla ?
+##  Frontières et collisions : Analyse mondiale et locale des accidents.
 
 Avant même d'examiner le graphique spécifique, il est plausible de supposer que les États-Unis enregistrent le plus grand nombre d'accidents (ou de décès) impliquant des véhicules Tesla. Cette hypothèse repose sur le fait que les États-Unis possèdent la plus grande population de conducteurs au monde et, par conséquent, le plus grand nombre de véhicules et de kilomètres parcourus, ce qui augmente statistiquement la probabilité d'accidents par rapport à des pays plus petits comme le Danemark, la Nouvelle-Zélande ou la Suisse.
 
