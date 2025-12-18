@@ -13,6 +13,8 @@ library(ggrepel)
 library(skimr)
 library(dplyr)
 library(forecast)
+library(lmtest)
+library(broom)
 td_csv <- read_csv("td-csv.csv")
 
 ```
@@ -284,8 +286,23 @@ Deaths_per_year <- Tesla_casualties %>%
 ts_deaths <- ts(Deaths_per_year$Total_deaths,
                 start = min(Deaths_per_year$Year),
                 frequency = 1)
-# Modélisation ARIMA automatique et prédiction (h = 5 ans)
-fit_arima <- auto.arima(ts_deaths, allowdrift = TRUE)
+
+# Calcul du modèle
+fit_arima <- auto.arima(ts_deaths)
+
+
+# Vérification de l'existence de coefficients avant de tester
+if (length(coef(fit_arima)) > 0) {
+  # Si des coefficients existent, on fait le test
+  arima_matrix <- lmtest::coeftest(fit_arima)
+  arima_df <- as.data.frame(arima_matrix[, , drop = FALSE])
+  knitr::kable(arima_df, caption = "Significativité des coefficients ARIMA")
+} else {
+  # Si aucun coefficient (modèle simple/bruit blanc)
+  print("Le modèle ARIMA sélectionné est un modèle vide (bruit blanc ou marche aléatoire). Aucun coefficient à tester.")
+}
+
+
 pred_arima <- forecast(fit_arima, h = 5)
 
 #intervalle de confiance
@@ -299,10 +316,12 @@ autoplot(pred_arima) +
               x = "Années",
               y = "Nombre total de décès") +
   theme_minimal()
+
 ```
+
+
+
 ```{r summary_skim_stats_years_deaths}
-summary(Deaths_per_year)
-skim(Deaths_per_year)
 knitr::kable(Deaths_per_year)
 
 ```
