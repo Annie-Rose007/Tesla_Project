@@ -267,7 +267,7 @@ ggplot(Deaths_per_Country, aes(x = reorder(Country, -Total_deaths), y = Total_de
 ```
 
 En se référant au graphique intitulé "Nombre totale de décès par pays (Tesla)" présenté à l'écran, l'hypothèse est confirmée :
-Le graphique indique clairement que les États-Unis (USA) sont le pays avec le plus grand nombre de décès enregistrés dans le cadre de cette analyse. La barre associée aux États-Unis est significativement plus haute que toutes les autres barres du graphique, dominant visuellement la répartition des décès par pays (Chine,Allemagne, Canada,etc.).
+Le graphique indique clairement que les États-Unis (USA) sont le pays avec le plus grand nombre de décès enregistrés dans le cadre de cette analyse. La barre associée aux États-Unis est significativement plus haute que toutes les autres barres du graphique, dominant visuellement la répartition des décès par pays (Chine, Allemagne, Canada,etc.).
 
  Quels sont les États américains où l'Autopilot est le plus mis à l'épreuve ? Notre attention se porte sur le Massachusetts. Entre des infrastructures urbaines denses et des habitudes de conduite particulièrement nerveuses, cet État constitue un cas d'étude idéal pour savoir si l'IA de Tesla parvient à s'adapter à des environnements humains et physiques aussi exigeants.
 
@@ -345,6 +345,14 @@ Enfin, notre hypothèse concernant le Massachusetts est infirmée. Bien que nous
 knitr::kable(Deaths_per_state_USA)
 
 ```
+
+
+## Tesla Deaths : Le verdict des données entre IA et erreur humaine
+
+
+
+
+
 
 :::: {style="display: flex; align-items: flex-start;"}
 
