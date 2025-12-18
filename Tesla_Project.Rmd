@@ -180,11 +180,9 @@ Le tablaux ci-haut montre le résultat de la régression linéaire du graphique 
 1. La P-value globale (Le modèle est-il utile ?) 
 Regardez la toute dernière ligne : p-value: 6.798e-06. 
 
-•	Elle est très inférieure à 0,05. Cela signifie que votre modèle est statistiquement significatif : les variables choisies (Year, Modèle, Autopilot) ont un impact réel sur le nombre de décès, ce n'est pas dû au hasard. 
+•	Elle est très inférieure à 0,05. Cela signifie que le modèle est statistiquement significatif : les variables choisies (Year, Modèle, Autopilot) ont un impact réel sur le nombre de décès, ce n'est pas dû au hasard. 
 
 2. Interprétation des Coefficients (L'impact de chaque variable) 
-
-C'est ici que vous lisez l'effet de chaque facteur : 
 
 •	Year (0.038790) : La p-value est de 0,00897 (significatif). Cela indique une tendance à la hausse : chaque année supplémentaire est associée à une légère augmentation du nombre de décès (environ +0,038 par accident répertorié).
 
@@ -198,11 +196,11 @@ o	Le code 1 (Autopilot engagé) montre curieusement un coefficient négatif (-0,
 
 o	Le code 2 montre un coefficient positif fort (+0,70), indiquant une hausse des décès dans ces circonstances spécifiques. 
 
-3. La qualité du modèle (R2cap R squared𝑅2)
+3. La qualité du modèle (𝑅2)
 
-•	Multiple R-squared : 0.1565
+•	Multiple R2 : 0.1565
 
-•	Cela signifie que votre modèle explique environ 15,6 % de la variation du nombre de décès. C'est un score relativement faible (proche de 0), ce qui indique que beaucoup d'autres facteurs non inclus dans votre code (vitesse, météo, type de route) influencent grandement la mortalité. 
+•	Cela signifie que le modèle explique environ 15,6 % de la variation du nombre de décès. C'est un score relativement faible (proche de 0), ce qui indique que beaucoup d'autres facteurs non inclus dans le code (vitesse, météo, type de route) influencent grandement la mortalité. 
 
 4. Les codes de significativité (Les étoiles) 
 
@@ -210,10 +208,11 @@ o	Le code 2 montre un coefficient positif fort (+0,70), indiquant une hausse des
 
 •	* : Impact fiable.
 
-•	. ou rien : Pas d'impact prouvé statistiquement. 
-Résumé pour votre rapport : 
+•	. ou rien : Pas d'impact prouvé statistiquement.
 
-"L'analyse par régression montre que l'année et le modèle de véhicule (notamment le Cybertruck) influencent significativement le nombre de décès. Bien que le modèle soit statistiquement valide (p<0,05p is less than 0 comma 05𝑝<0,05), il n'explique que 15,6 % de la variance totale, suggérant que d'autres facteurs externes prédominent dans la gravité des accidents." 
+En résumé: 
+
+L'analyse par régression montre que l'année et le modèle de véhicule (notamment le Cybertruck) influencent significativement le nombre de décès. Bien que le modèle soit statistiquement valide (𝑝<0,05), il n'explique que 15,6 % de la variance totale, suggérant que d'autres facteurs externes prédominent dans la gravité des accidents." 
 
 Attention : Notez que 393 observations ont été supprimées car des données étaient manquantes (393 observations effacées). Cela peut biaiser les résultats si les données manquantes ne sont pas aléatoires.
 
