@@ -349,6 +349,15 @@ knitr::kable(Deaths_per_state_USA)
 
 ## Tesla Deaths : Le verdict des données entre IA et erreur humaine
 
+L'analyse des données de mortalité Tesla en 2025 révèle un verdict nuancé : le risque ne disparaît pas avec l'IA, il se transforme. 
+
+L'erreur humaine est souvent la cause initiale (distraction).
+
+L'erreur robotique est l'incapacité du système à compenser cette distraction ou à gérer des situations complexes.
+
+En somme, l'IA Tesla réduit certains types d'accidents (collisions arrières simples) mais en crée de nouveaux, plus complexes et souvent plus médiatisés, liés à la transition critique entre le contrôle humain et l'assistance logicielle. Pour approfondir ces statistiques, vous pouvez consulter les derniers rapports sur TeslaDeaths.com.
+
+
 
 
 
